@@ -15,16 +15,9 @@ function setup() {
 	createCanvas(800, 700);
 	rectMode(CENTER);
 	
-	/*if(keyPressed(DOWN_ARROW)){
-		packageSprite.positionx= 100
-		packageSprite.positiony= 100 ;;
-	}*/
-	
-	Matter.Body.setStatic(packageSprite,false);
 
 
-	packageSprite.x= package.bogy.position.x;
-	packageSprite.y= packageBody.position.y;
+
 
 	packageSprite=createSprite(width/2, 80, 10,10);
 	packageSprite.addImage(packageIMG)
@@ -41,9 +34,11 @@ function setup() {
 	engine = Engine.create();
 	world = engine.world;
 
-	packageBody = Bodies.circle(width/2 , 200 , 5 , {restitution:3, isStatic:true});
+	packageBody = Bodies.circle(width/2 , 200 , 5 , {restitution:0.5, isStatic:true});
 	World.add(world, packageBody);
-	
+
+	packageSprite.x= packageBody.position.x;
+	packageSprite.y= packageBody.position.y;
 
 	//Create a Ground
 	ground = Bodies.rectangle(width/2, 650, width, 10 , {isStatic:true} );
@@ -65,9 +60,11 @@ function draw() {
 }
 
 function keyPressed() {
+
  if (keyCode === DOWN_ARROW) {
+	
     // Look at the hints in the document and understand how to make the package body fall only on
-    
+    Matter.Body.setStatic(packageBody,false);
   }
 }
 
